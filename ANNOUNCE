@@ -1,5 +1,4 @@
-
-Libpng 1.2.51 - February 6, 2014
+Libpng 1.6.13 - August 21, 2014
 
 This is a public release of libpng, intended for use in production codes.
 
@@ -8,58 +7,48 @@ Files available for download:
 Source files with LF line endings (for Unix/Linux) and with a
 "configure" script
 
-   libpng-1.2.51.tar.xz (LZMA-compressed, recommended)
-   libpng-1.2.51.tar.gz
-   libpng-1.2.51.tar.bz2
-
-Source files with LF line endings (for Unix/Linux) without the
-"configure" script
-
-   libpng-1.2.51-no-config.tar.xz (LZMA-compressed, recommended)
-   libpng-1.2.51-no-config.tar.gz
-   libpng-1.2.51-no-config.tar.bz2
+   libpng-1.6.13.tar.xz (LZMA-compressed, recommended)
+   libpng-1.6.13.tar.gz
 
 Source files with CRLF line endings (for Windows), without the
 "configure" script
 
-   lpng1251.zip
-   lpng1251.7z
-   lpng1251.tar.bz2
-
-Project files
-
-   libpng-1.2.51-project-netware.zip
-   libpng-1.2.51-project-wince.zip
+   lpng1613.7z  (LZMA-compressed, recommended)
+   lpng1613.zip
 
 Other information:
 
-   libpng-1.2.51-README.txt
-   libpng-1.2.51-KNOWNBUGS.txt
-   libpng-1.2.51-LICENSE.txt
-   libpng-1.2.51-Y2K-compliance.txt
-   libpng-1.2.51-[previous version]-diff.txt
+   libpng-1.6.13-README.txt
+   libpng-1.6.13-LICENSE.txt
+   libpng-1.6.13-*.asc (armored detached GPG signatures)
 
-Changes since the last public release (1.2.50):
+Changes since the last public release (1.6.12):
 
-version 1.2.51 [February 6, 2014]
-
-version 1.0.61 and 1.2.51 [February 6, 2014]
-  Ignore, with a warning, out-of-range value of num_trans in png_set_tRNS().
-  Replaced AM_CONFIG_HEADER(config.h) with AC_CONFIG_HEADERS([config.h])
-    in configure.ac
-  Changed default value of PNG_USER_CACHE_MAX from 0 to 32767 in pngconf.h.
-  Avoid a possible memory leak in contrib/gregbook/readpng.c
-  Revised libpng.3 so that "doclifter" can process it.
-  Changed '"%s"m' to '"%s" m' in png_debug macros to improve portability
-    among compilers.
-  Rebuilt the configure scripts with autoconf-2.69 and automake-1.14.1
-  Removed potentially misleading warning from png_check_IHDR().
-  Quiet set-but-not-used warnings in pngset.c
-  Quiet an uninitialized memory warning from VC2013 in png_get_png().
-  Quiet unused variable warnings from clang by porting PNG_UNUSED() from
-    libpng-1.4.6.
-  Added -DZ_SOLO to CFLAGS in contrib/pngminim/*/makefile
-  Added an #ifdef PNG_FIXED_POINT_SUPPORTED/#endif in pngset.c
+  Quieted -Wsign-compare and -Wclobber compiler warnings in
+    contrib/pngminus/*.c
+  Added "(void) png_ptr;" where needed in contrib/gregbook to quiet
+    compiler complaints about unused pointers.
+  Split a long output string in contrib/gregbook/rpng2-x.c.
+  Added "PNG_SET_OPTION" requirement for sRGB chunk support to pnglibconf.dfa,
+    Needed for write-only support (John Bowler).
+  Changed "if defined(__ARM_NEON__)" to
+    "if (defined(__ARM_NEON__) || defined(__ARM_NEON))" (James Wu).
+  Fixed clang no-warning builds: png_digit was defined but never used.
+  Fixed an incorrect separator ("/" should be "\") in scripts/makefile.vcwin32
+    (bug report from Wolfgang S. Kechel).  Bug was introduced in libpng-1.6.11.
+    Also fixed makefile.bc32, makefile.bor, makefile.msc, makefile.intel, and
+    makefile.tc3 similarly.
+  Removed scripts/makefile.elf. It has not worked since libpng-1.5.0beta14
+    due to elimination of the PNG_FUNCTION_EXPORT and PNG_DATA_EXPORT
+    definitions from pngconf.h.
+  Ensure that CMakeLists.txt makes the target "lib" directory before making
+    symbolic link into it (SourceForge bug report #226 by Rolf Timmermans).
+  Added opinion that the ECCN (Export Control Classification Number) for
+    libpng is EAR99 to the README file.
+  Eliminated use of "$<" in makefile explicit rules, when copying
+    $PNGLIBCONF_H_PREBUILT.  This does not work on some versions of make;
+    bug introduced in libpng version 1.6.11.
+  Made "ccopts" agree with "CFLAGS" in scripts/makefile.hp* and makefile.*sunu
 
 Send comments/corrections/commendations to png-mng-implement at lists.sf.net
 (subscription required; visit
@@ -68,4 +57,3 @@ to subscribe)
 or to glennrp at users.sourceforge.net
 
 Glenn R-P
-#endif
